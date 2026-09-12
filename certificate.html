@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>وثيقة الاعتماد الرسمية - جمهورية الهبد والسلكان 🎓</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .cert-font { font-family: 'Amiri', serif; }
+        body { font-family: 'Cairo', sans-serif; }
+        
+        .official-seal {
+            width: 90px;
+            height: 90px;
+            border: 3px dashed #1d4ed8;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #1d4ed8;
+            background-color: rgba(239, 246, 255, 0.8);
+            transform: rotate(-12deg);
+            box-shadow: inset 0 0 10px rgba(29, 78, 216, 0.2);
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #certificate-card, #certificate-card * {
+                visibility: visible;
+            }
+            #certificate-card {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                border: none !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white flex flex-col items-center justify-center min-h-screen p-4">
+
+    <!-- وثيقة الشهادة الرسمية -->
+    <div id="certificate-card" class="max-w-2xl w-full bg-[#fbf9f1] text-slate-900 p-8 md:p-12 rounded-xl shadow-2xl border-[12px] border-double border-amber-800 relative my-4 text-center cert-font">
+        
+        <div class="flex justify-between items-center border-b-2 border-amber-700/30 pb-4 mb-6">
+            <div class="text-xs font-bold text-amber-900">جمهورية الهبد والسلكان العربية<br>وزارة التخصصات الدقيقة</div>
+            <div class="text-3xl">🦅</div>
+            <div class="text-xs font-bold text-amber-900">رقم الاعتماد: #2026-OK<br>سنة التخرج: لحد ما ربها يفرجها</div>
+        </div>
+
+        <h3 id="college-header-title" class="text-lg text-amber-800 font-bold tracking-widest uppercase mb-1">باسم عميد الكلية</h3>
+        <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-wide" style="font-family: 'Amiri', serif;">شهادة تخصص معتمدة</h1>
+
+        <p class="text-base text-slate-700 mb-2">تشهد اللجنة العليا بأن الزميل / الزميلة:</p>
+        
+        <div id="display-name" class="text-3xl font-black text-red-700 border-b-2 border-dashed border-amber-700 pb-1 mb-6 inline-block px-8">
+            [جاري تحميل الاسم...]
+        </div>
+        
+        <p class="text-sm text-slate-700 mb-6 leading-relaxed px-4">
+            قد اجتاز بنجاح كافة الاختبارات المقررة، وأثبت جدارته المطلقة في تخصصه، وتم منحه التقرير العشوائي الآتي:
+        </p>
+
+        <div id="result-box" class="mb-6 border-4 border-amber-500 bg-amber-100/50 p-6 rounded-2xl shadow-inner">
+            <div id="degree-icon" class="text-6xl mb-3">---</div>
+            <div id="degree-title" class="text-2xl font-black text-amber-950 mb-2">---</div>
+            <div id="degree-desc" class="text-sm text-slate-700 leading-relaxed">---</div>
+        </div>
+
+        <div class="flex justify-between items-center border-t-2 border-amber-700/30 pt-6 mt-6 text-xs font-bold text-amber-900">
+            <div class="text-center">
+                <div class="mb-2">رئيس مجلس الأمناء</div>
+                <div class="font-['Amiri'] text-lg text-red-800">أ.د. فهلوي زمانه</div>
+            </div>
+            
+            <div class="official-seal">
+                <span class="text-xs font-bold">جمهورية الهبد</span>
+                <span class="text-xl my-0.5">🦅</span>
+                <span class="text-[9px] font-black">ختم معتمد</span>
+            </div>
+
+            <div class="text-center">
+                <div class="mb-2">عميد الكلية</div>
+                <div class="font-['Amiri'] text-lg text-red-800" id="dean-signature">---</div>
+            </div>
+        </div>
+
+        <div class="mt-8 pt-2 border-t border-amber-700/20 text-[11px] font-bold text-amber-900 tracking-wider">
+            🌐 صمم شهادتك الآن عبر موقعنا: <span id="website-footer-link" class="text-red-700 underline"></span>
+        </div>
+    </div>
+
+    <!-- أزرار التحكم والمشاركة -->
+    <div class="max-w-2xl w-full flex flex-col gap-3 mt-4 mb-8">
+        <!-- زر فتح نافذة المشاركة (فيسبوك، واتساب، تليجرام) -->
+        <button onclick="toggleModal(true)" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black p-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer text-lg">
+            <span>🚀</span> شارك الشهادة على فيسبوك والسوشيال ميديا
+        </button>
+
+        <!-- زر الحفظ كصورة أو PDF للاستوري -->
+        <button onclick="window.print()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold p-3 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer">
+            <span>📸</span> حفظ الشهادة كصورة/PDF (للاستوري)
+        </button>
+
+        <button onclick="goBackToHome()" class="w-full bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold p-3 rounded-xl transition cursor-pointer">
+            🔄 شهادة تانية
+        </button>
+    </div>
+
+    <!-- نافذة منسدلة لاختيار المنصة -->
+    <div id="share-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-slate-900 border border-slate-700 w-full max-w-md p-6 rounded-2xl shadow-2xl text-center">
+            <h3 class="text-xl font-black text-amber-400 mb-2">اختر منصة المشاركة 🌐</h3>
+            <p class="text-xs text-slate-400 mb-6">انشر شهادتك وخلي الكل يشوفها:</p>
+            
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <!-- زر فيسبوك الرسمي اللي بيفتح نافذة إنشاء منشور بالمعاينة -->
+                <a id="facebook-btn" href="#" target="_blank" class="bg-blue-700 hover:bg-blue-600 p-3 rounded-xl font-bold flex items-center justify-center gap-2 transition text-white no-underline">
+                    <span>📘</span> فيسبوك
+                </a>
+                <a id="whatsapp-btn" href="#" target="_blank" class="bg-emerald-700 hover:bg-emerald-600 p-3 rounded-xl font-bold flex items-center justify-center gap-2 transition text-white no-underline">
+                    <span>💬</span> واتساب
+                </a>
+                <a id="telegram-btn" href="#" target="_blank" class="bg-sky-600 hover:bg-sky-500 p-3 rounded-xl font-bold flex items-center justify-center gap-2 transition text-white no-underline">
+                    <span>✈️</span> تليجرام
+                </a>
+                <button onclick="copyLinkOnly()" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-xl font-bold flex items-center justify-center gap-2 transition text-white cursor-pointer border-0">
+                    <span>📋</span> نسخ اللينك
+                </button>
+            </div>
+
+            <button onclick="toggleModal(false)" class="w-full bg-red-900/40 hover:bg-red-900/60 text-red-200 font-bold p-2.5 rounded-xl transition cursor-pointer text-sm border-0">
+                إغلاق
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const habadLevels = [
+            {
+                title: '"هبّيد درجة أولى.. ماجستير في الفتي"',
+                desc: "مبيقفش قدامه أي سؤال، لو سألته عن مفاعل ديمونا هيألف لك نظرية علمية في ثانية وتصدقه!",
+                dean: "أ.د. عنتر الهبد"
+            },
+            {
+                title: '"هبّيد درجة تانية.. بيفصل معلومات على المزاج"',
+                desc: "غلط بس مبيعتترفش، ولو واجهته بالدليل هيقولك 'أنا كنت لسة هقولك كدة' بكل برود وثقة!",
+                dean: "أ.د. وثاق الفتوحات"
+            },
+            {
+                title: '"هبّيد بامتياز.. أستاذ الدكتوراه في الهبد العلني"',
+                desc: "ده لو مسك وزارة الاقتصاد هيألف عملة جديدة، كله كذب في كذب بس بضحكة تخليه يخرج زي الشعرة!",
+                dean: "الزعيم / هبدة العظيم"
+            }
+        ];
+
+        const salkanLevels = [
+            {
+                title: '"سالك بزيادة.. قلبه أبيض زي اللبن"',
+                desc: "ده أنت لو حطوك على الجرح يطيب، بس للأسف هيتضحك عليك في قرشين تلاتة قريباً من كتر طيبتك.",
+                dean: "أ.د. سالك أبو النجا"
+            },
+            {
+                title: '"مش سالك قوي.. لواء مخابرات متخفي"',
+                desc: "ماشي يا أبو الـ واد، بتضحك في الوش ومن تحت لتحت بتدبر المؤامرات وتطلع نفسك بريء!",
+                dean: "اللواء / سالك الخفي"
+            },
+            {
+                title: '"مفيش سلكان بجنيه.. خرسانة مسلحة"',
+                desc: "ده أنت لو صفيوك مش هينزل غير زيت مكن، قلبك أسود من حلة المهندس ومفيش أي أمل منك!",
+                dean: "الزعيم / مقفول تماماً"
+            }
+        ];
+
+        const mainSiteUrl = window.location.origin + window.location.pathname.replace('certificate.html', 'index.html');
+
+        window.onload = function() {
+            document.getElementById('website-footer-link').innerText = mainSiteUrl.replace('https://', '');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+            const college = urlParams.get('college');
+
+            if (!name) {
+                alert("عفواً، لم يتم العثور على اسم الخريج!");
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const decodedName = decodeURIComponent(name);
+            document.getElementById('display-name').innerText = decodedName;
+
+            const resultBox = document.getElementById('result-box');
+            const icon = document.getElementById('degree-icon');
+            const title = document.getElementById('degree-title');
+            const desc = document.getElementById('degree-desc');
+            const deanSig = document.getElementById('dean-signature');
+            const headerTitle = document.getElementById('college-header-title');
+
+            if (college === 'habad') {
+                const randomHabad = habadLevels[Math.floor(Math.random() * habadLevels.length)];
+                headerTitle.innerText = "باسم عميد كلية الهبد المتقدم";
+                icon.innerText = "🧠";
+                title.innerText = randomHabad.title;
+                title.className = "text-2xl font-black text-red-900 mb-2";
+                desc.innerText = randomHabad.desc;
+                deanSig.innerText = randomHabad.dean;
+                resultBox.className = "mb-6 border-4 border-red-500 bg-red-100/50 p-6 rounded-2xl shadow-inner";
+            } else {
+                const randomSalkan = salkanLevels[Math.floor(Math.random() * salkanLevels.length)];
+                headerTitle.innerText = "باسم عميد كلية السلكان الصافي";
+                icon.innerText = "🤍";
+                title.innerText = randomSalkan.title;
+                title.className = "text-2xl font-black text-emerald-950 mb-2";
+                desc.innerText = randomSalkan.desc;
+                deanSig.innerText = randomSalkan.dean;
+                resultBox.className = "mb-6 border-4 border-emerald-500 bg-emerald-100/50 p-6 rounded-2xl shadow-inner";
+            }
+
+            // ربط الروابط الرسمية للمنصات داخل عناصر الـ HTML لضمان الأمان التام وعدم حدوث أي خطأ
+            const shareText = `لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان باسم (${decodedName})! اطلع اعمل شهادتك فوراً من هنا: ${mainSiteUrl}`;
+            
+            document.getElementById('facebook-btn').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(mainSiteUrl)}`;
+            document.getElementById('whatsapp-btn').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+            document.getElementById('telegram-btn').href = `https://t.me/share/url?url=${encodeURIComponent(mainSiteUrl)}&text=${encodeURIComponent(shareText)}`;
+        };
+
+        function toggleModal(show) {
+            document.getElementById('share-modal').style.display = show ? 'flex' : 'none';
+        }
+
+        function copyLinkOnly() {
+            const name = document.getElementById('display-name').innerText;
+            const shareText = `لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان باسم (${name})! اطلع اعمل شهادتك فوراً من هنا: ${mainSiteUrl}`;
+
+            navigator.clipboard.writeText(shareText).then(() => {
+                alert("تم نسخ النص واللينك بنجاح!");
+                toggleModal(false);
+            }).catch(err => {
+                alert("تعذر النسخ.");
+            });
+        }
+
+        function goBackToHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
