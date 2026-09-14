@@ -38,13 +38,6 @@
             box-shadow: inset 0 0 10px rgba(29, 78, 216, 0.2);
         }
 
-        .barcode-lines {
-            font-family: monospace;
-            letter-spacing: 2px;
-            font-size: 14px;
-            color: #475569;
-        }
-
         @media print {
             body * {
                 visibility: hidden;
@@ -70,15 +63,12 @@
     <!-- وثيقة الشهادة الرسمية -->
     <div id="certificate-card" class="max-w-2xl w-full bg-[#fbf9f1] text-slate-900 p-8 md:p-12 rounded-xl shadow-2xl border-[12px] border-double border-amber-800 relative my-4 text-center cert-font">
         
-        <div class="flex justify-between items-start mb-4">
+        <div class="flex justify-between items-center mb-4">
             <div class="bg-amber-500/15 border border-amber-600/40 text-amber-900 text-[11px] font-black px-3 py-1 rounded-full inline-flex items-center gap-1 shadow-sm">
                 <span>💯</span>
                 <span>مضمون ومعتمد 100%</span>
             </div>
-            <div class="text-left">
-                <div id="serial-number" class="text-[11px] font-bold text-slate-700">رقم الوثيقة: #FBK-8842</div>
-                <div class="barcode-lines">||| | |||| | || | |||||</div>
-            </div>
+            <div id="serial-number" class="text-xs font-bold text-slate-700">رقم الوثيقة: #FBK-8842</div>
         </div>
 
         <div class="flex justify-between items-center border-b-2 border-amber-700/30 pb-4 mb-6">
@@ -275,11 +265,9 @@
             const idx = hash % 6;
             const chosenLevel = allLevels[idx];
 
-            // رقم مسلسل ثابت
             const serialNum = (hash * 37) % 8999 + 1000;
             document.getElementById('serial-number').innerText = `رقم الوثيقة: #FBK-${serialNum}`;
 
-            // ترتيب الخريج على الجمهورية
             const rankNum = (hash * 13) % 4900 + 100;
             document.getElementById('viral-stat-box').innerText = `📊 تصنيفك الرسمي: أنت الخريج رقم (${rankNum.toLocaleString()}) على مستوى جمهورية الهبد والسلكان!`;
 
@@ -300,7 +288,6 @@
             document.getElementById('whatsapp-btn').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
             document.getElementById('telegram-btn').href = `https://t.me/share/url?url=${encodeURIComponent(mainSiteUrl)}&text=${encodeURIComponent(shareText)}`;
 
-            // إطلاق قصاصات الاحتفال (Confetti) عند فتح الصفحة
             if (typeof confetti === 'function') {
                 confetti({
                     particleCount: 90,
