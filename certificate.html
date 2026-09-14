@@ -2,8 +2,16 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وثيقة الاعتماد الرسمية - جمهورية الهبد والسلكان 🎓</title>
+    
+    <!-- أكواد المعاينة لفيسبوك والسوشيال ميديا -->
+    <meta property="og:title" content="وثيقة الاعتماد الرسمية - جمهورية الهبد والسلكان" />
+    <meta property="og:description" content="شوف وثيقة اعتمادي الرسمية في جمهورية الهبد والسلكان واعمل شهادتك فوراً!" />
+    <meta property="og:type" content="website" />
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="fazlakaa.jpg">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -40,6 +48,8 @@
                 width: 100%;
                 border: none !important;
                 box-shadow: none !important;
+                margin: 0;
+                padding: 20px;
             }
         }
     </style>
@@ -104,14 +114,27 @@
 
     <!-- أزرار التحكم والمشاركة -->
     <div class="max-w-2xl w-full flex flex-col gap-3 mt-4 mb-8">
+        <!-- زر فتح نافذة مشاركة الرابط -->
         <button onclick="toggleModal(true)" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black p-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer text-lg">
-            <span>🚀</span> شارك الشهادة على فيسبوك والسوشيال ميديا
+            <span>🚀</span> شارك الرابط على فيسبوك والسوشيال ميديا
         </button>
 
-        <button onclick="window.print()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold p-3 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer">
-            <span>📸</span> حفظ الشهادة كصورة/PDF (للاستوري)
+        <!-- زر المشاركة المباشرة (صورة + نص) للموبايل -->
+        <button onclick="shareImageDirectly()" id="share-img-btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black p-3.5 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer text-base">
+            <span>📤</span> مشاركة الصورة مباشرة (واتساب / فيسبوك)
         </button>
 
+        <!-- زر حفظ الشهادة كصورة PNG بجودة عالية -->
+        <button onclick="downloadCertificateAsImage()" id="save-btn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black p-3.5 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer text-base">
+            <span>📸</span> حفظ الشهادة كصورة PNG
+        </button>
+
+        <!-- زر الحفظ كـ PDF / طباعة -->
+        <button onclick="window.print()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold p-3 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer text-sm">
+            <span>📄</span> حفظ كـ PDF / طباعة
+        </button>
+
+        <!-- زر العودة لصفحة البداية -->
         <button onclick="goBackToHome()" class="w-full bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold p-3 rounded-xl transition cursor-pointer">
             🔄 شهادة تانية
         </button>
@@ -231,6 +254,67 @@
             document.getElementById('telegram-btn').href = `https://t.me/share/url?url=${encodeURIComponent(mainSiteUrl)}&text=${encodeURIComponent(shareText)}`;
         };
 
+        function downloadCertificateAsImage() {
+            const card = document.getElementById('certificate-card');
+            const btn = document.getElementById('save-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>⏳</span> جاري تحضير الصورة...';
+
+            window.htmlToImage.toPng(card, {
+                pixelRatio: 2,
+                cacheBust: true,
+                style: { transform: 'scale(1)', margin: '0' }
+            }).then(dataUrl => {
+                const link = document.createElement('a');
+                link.download = 'fazlaka-certificate.png';
+                link.href = dataUrl;
+                link.click();
+                btn.innerHTML = originalText;
+            }).catch(err => {
+                alert('حدث خطأ أثناء حفظ الصورة، حاول مرة أخرى.');
+                btn.innerHTML = originalText;
+            });
+        }
+
+        function shareImageDirectly() {
+            const card = document.getElementById('certificate-card');
+            const btn = document.getElementById('share-img-btn');
+            const decodedName = document.getElementById('display-name').innerText;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>⏳</span> جاري تجهيز المشاركة...';
+
+            window.htmlToImage.toBlob(card, {
+                pixelRatio: 2,
+                cacheBust: true
+            }).then(blob => {
+                const file = new File([blob], 'fazlaka-certificate.png', { type: 'image/png' });
+                const shareText = `لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان باسم (${decodedName})! صمم شهادتك من هنا: ${mainSiteUrl}`;
+
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    navigator.share({
+                        files: [file],
+                        title: 'شهادة تخصص معتمدة',
+                        text: shareText
+                    }).then(() => {
+                        btn.innerHTML = originalText;
+                    }).catch(() => {
+                        btn.innerHTML = originalText;
+                    });
+                } else {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.download = 'fazlaka-certificate.png';
+                    link.href = url;
+                    link.click();
+                    alert('تم حفظ الصورة على جهازك لتقوم بمشاركتها.');
+                    btn.innerHTML = originalText;
+                }
+            }).catch(() => {
+                alert('حدث خطأ، حاول مرة أخرى.');
+                btn.innerHTML = originalText;
+            });
+        }
+
         function toggleModal(show) {
             document.getElementById('share-modal').style.display = show ? 'flex' : 'none';
         }
@@ -242,7 +326,7 @@
             navigator.clipboard.writeText(shareText).then(() => {
                 alert("تم نسخ النص واللينك بنجاح!");
                 toggleModal(false);
-            }).catch(err => {
+            }).catch(() => {
                 alert("تعذر النسخ.");
             });
         }
