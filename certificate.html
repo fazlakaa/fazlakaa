@@ -172,48 +172,78 @@
     </div>
 
     <script>
-        const habadLevels = [
+        // 6 تخصصات مختلفة يتم اختيارها بناءً على حروف الاسم بشكل ثابت
+        const allLevels = [
             {
+                header: "باسم عميد كلية الهبد المتقدم",
+                icon: "🧠",
                 title: '"هبّيد درجة أولى.. ماجستير في الفتي"',
                 desc: "مبيقفش قدامه أي سؤال، لو سألته عن مفاعل ديمونا هيألف لك نظرية علمية في ثانية وتصدقه!",
-                dean: "أ.د. عنتر الهبد"
+                dean: "أ.د. عنتر الهبد",
+                boxClass: "mb-6 border-4 border-red-500 bg-red-100/50 p-6 rounded-2xl shadow-inner",
+                titleClass: "text-2xl font-black text-red-900 mb-2"
             },
             {
-                title: '"هبّيد درجة تانية.. بيفصل معلومات على المزاج"',
-                desc: "غلط بس مبيعتترفش، ولو واجهته بالدليل هيقولك 'أنا كنت لسة هقولك كدة' بكل برود وثقة!",
-                dean: "أ.د. وثاق الفتوحات"
-            },
-            {
-                title: '"هبّيد بامتياز.. أستاذ الدكتوراه في الهبد العلني"',
-                desc: "ده لو مسك وزارة الاقتصاد هيألف عملة جديدة، كله كذب في كذب بس بضحكة تخليه يخرج زي الشعرة!",
-                dean: "الزعيم / هبدة العظيم"
-            }
-        ];
-
-        const salkanLevels = [
-            {
+                header: "باسم عميد كلية السلكان الصافي",
+                icon: "🤍",
                 title: '"سالك بزيادة.. قلبه أبيض زي اللبن"',
                 desc: "ده أنت لو حطوك على الجرح يطيب، بس للأسف هيتضحك عليك في قرشين تلاتة قريباً من كتر طيبتك.",
-                dean: "أ.د. سالك أبو النجا"
+                dean: "أ.د. سالك أبو النجا",
+                boxClass: "mb-6 border-4 border-emerald-500 bg-emerald-100/50 p-6 rounded-2xl shadow-inner",
+                titleClass: "text-2xl font-black text-emerald-950 mb-2"
             },
             {
+                header: "باسم عميد كلية الفتي الالكتروني",
+                icon: "📱",
+                title: '"فيلسوف السوشيال ميديا وعميد الكومنتات"',
+                desc: "بيكتب 'متابع في صمت' وهو قاري الكومنت بس، وعنده رأي في سعر الطماطم وأسهم الفضاء.",
+                dean: "أ.د. عبد الفتاح الشير",
+                boxClass: "mb-6 border-4 border-amber-500 bg-amber-100/50 p-6 rounded-2xl shadow-inner",
+                titleClass: "text-2xl font-black text-amber-950 mb-2"
+            },
+            {
+                header: "باسم عميد أكاديمية التلقيح والدهاء",
+                icon: "🕵️‍♂️",
                 title: '"مش سالك قوي.. لواء مخابرات متخفي"',
                 desc: "ماشي يا أبو الـ واد، بتضحك في الوش ومن تحت لتحت بتدبر المؤامرات وتطلع نفسك بريء!",
-                dean: "اللواء / سالك الخفي"
+                dean: "اللواء / سالك الخفي",
+                boxClass: "mb-6 border-4 border-blue-500 bg-blue-100/50 p-6 rounded-2xl shadow-inner",
+                titleClass: "text-2xl font-black text-blue-950 mb-2"
             },
             {
+                header: "باسم عميد كلية الهبد العلني",
+                icon: "🎓",
+                title: '"أستاذ الدكتوراه في التأليف الفوري"',
+                desc: "ده لو مسك وزارة الاقتصاد هيألف عملة جديدة، كله كذب في كذب بس بضحكة تخليه يخرج زي الشعرة!",
+                dean: "الزعيم / هبدة العظيم",
+                boxClass: "mb-6 border-4 border-purple-500 bg-purple-100/50 p-6 rounded-2xl shadow-inner",
+                titleClass: "text-2xl font-black text-purple-950 mb-2"
+            },
+            {
+                header: "باسم عميد معهد القفل المخصوص",
+                icon: "🧱",
                 title: '"مفيش سلكان بجنيه.. خرسانة مسلحة"',
                 desc: "ده أنت لو صفيوك مش هينزل غير زيت مكن، قلبك أسود من حلة المهندس ومفيش أي أمل منك!",
-                dean: "الزعيم / مقفول تماماً"
+                dean: "الزعيم / مقفول تماماً",
+                boxClass: "mb-6 border-4 border-slate-600 bg-slate-200/70 p-6 rounded-2xl shadow-inner",
+                titleClass: "text-2xl font-black text-slate-900 mb-2"
             }
         ];
 
         const mainSiteUrl = "https://fazlakaa.pro/";
 
+        // دالة تحسب رقم ثابت بناءً على حروف الاسم (من 0 إلى 5)
+        function getResultIndexFromName(name) {
+            let hash = 0;
+            for (let i = 0; i < name.length; i++) {
+                hash += name.charCodeAt(i);
+            }
+            return hash % 6;
+        }
+
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const name = urlParams.get('name');
-            const college = urlParams.get('college');
 
             if (!name) {
                 alert("عفواً، لم يتم العثور على اسم الخريج!");
@@ -224,32 +254,19 @@
             const decodedName = decodeURIComponent(name);
             document.getElementById('display-name').innerText = decodedName;
 
-            const resultBox = document.getElementById('result-box');
-            const icon = document.getElementById('degree-icon');
-            const title = document.getElementById('degree-title');
-            const desc = document.getElementById('degree-desc');
-            const deanSig = document.getElementById('dean-signature');
-            const headerTitle = document.getElementById('college-header-title');
+            const idx = getResultIndexFromName(decodedName);
+            const chosenLevel = allLevels[idx];
 
-            if (college === 'habad') {
-                const randomHabad = habadLevels[Math.floor(Math.random() * habadLevels.length)];
-                headerTitle.innerText = "باسم عميد كلية الهبد المتقدم";
-                icon.innerText = "🧠";
-                title.innerText = randomHabad.title;
-                title.className = "text-2xl font-black text-red-900 mb-2";
-                desc.innerText = randomHabad.desc;
-                deanSig.innerText = randomHabad.dean;
-                resultBox.className = "mb-6 border-4 border-red-500 bg-red-100/50 p-6 rounded-2xl shadow-inner";
-            } else {
-                const randomSalkan = salkanLevels[Math.floor(Math.random() * salkanLevels.length)];
-                headerTitle.innerText = "باسم عميد كلية السلكان الصافي";
-                icon.innerText = "🤍";
-                title.innerText = randomSalkan.title;
-                title.className = "text-2xl font-black text-emerald-950 mb-2";
-                desc.innerText = randomSalkan.desc;
-                deanSig.innerText = randomSalkan.dean;
-                resultBox.className = "mb-6 border-4 border-emerald-500 bg-emerald-100/50 p-6 rounded-2xl shadow-inner";
-            }
+            document.getElementById('college-header-title').innerText = chosenLevel.header;
+            document.getElementById('degree-icon').innerText = chosenLevel.icon;
+            
+            const titleEl = document.getElementById('degree-title');
+            titleEl.innerText = chosenLevel.title;
+            titleEl.className = chosenLevel.titleClass;
+
+            document.getElementById('degree-desc').innerText = chosenLevel.desc;
+            document.getElementById('dean-signature').innerText = chosenLevel.dean;
+            document.getElementById('result-box').className = chosenLevel.boxClass;
 
             const shareText = `لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان باسم (${decodedName})! اطلع اعمل شهادتك فوراً من هنا: ${mainSiteUrl}`;
             

@@ -8,7 +8,7 @@
     <link rel="icon" type="image/jpeg" href="fazlakaa.jpg">
     
     <meta property="og:title" content="بوابة التخصصات الكارثية - جمهورية الهبد والسلكان" />
-    <meta property="og:description" content="سجل بياناتك واختر كليتك لاستخراج وثيقة الاعتماد الرسمية ومعرفة تقديرك الحقيقي فوراً!" />
+    <meta property="og:description" content="سجل اسمك واستخرج وثيقة الاعتماد الرسمية ومعرفة تقديرك الحقيقي فوراً!" />
     <meta property="og:image" content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop" />
     <meta property="og:url" content="" id="meta-og-url" />
     <meta property="og:type" content="website" />
@@ -32,18 +32,8 @@
         </div>
 
         <h1 class="text-2xl font-black mb-2 text-amber-400">بوابة التخصصات الكارثية</h1>
-        <p class="text-slate-400 text-sm mb-6">سجل بياناتك واختر كليتك لاستخراج وثيقة الاعتماد الرسمية!</p>
+        <p class="text-slate-400 text-sm mb-6">اكتب اسمك الثلاثي ودع القدر يحدد تخصصك في الجمهورية!</p>
         
-        <!-- خانة اختيار الكلية -->
-        <div class="mb-4 text-right">
-            <label class="block text-xs text-slate-400 mb-1">اختر الكلية التابع لها:</label>
-            <select id="college-select" 
-                class="w-full p-4 rounded-xl bg-slate-800 border border-slate-700 text-white font-bold focus:outline-none focus:border-amber-400 transition appearance-none cursor-pointer">
-                <option value="habad">🧠 كلية الهبد المتقدم</option>
-                <option value="salkan">🤍 كلية السلكان الصافي</option>
-            </select>
-        </div>
-
         <!-- خانة إدخال الاسم -->
         <div class="mb-6 text-right">
             <label class="block text-xs text-slate-400 mb-1">اسم المواطن / الخريج:</label>
@@ -58,7 +48,7 @@
         </button>
     </div>
 
-    <!-- صندوق إعلان البانر تحت الكارت (يظهر على كل الشاشات بشكل منسق) -->
+    <!-- صندوق إعلان البانر تحت الكارت -->
     <div class="w-full max-w-md mx-auto mt-6 flex flex-col items-center justify-center bg-slate-900/60 border border-slate-800 rounded-xl p-4 text-center">
         <span class="text-[10px] text-slate-500 mb-2">إعلان</span>
         <div id="container-6f20a236765f1e892e66ce3e4c0974ff"></div>
@@ -75,15 +65,9 @@
 
         function goToCertificate() {
             const usernameEl = document.getElementById('username');
-            const collegeEl = document.getElementById('college-select');
-
-            if (!usernameEl || !collegeEl) {
-                alert("تأكد أن خانة الاسم والكلية عندهم الـ id المضبوط!");
-                return;
-            }
+            if (!usernameEl) return;
 
             const nameInput = usernameEl.value.trim();
-            const collegeSelect = collegeEl.value;
             
             if(!nameInput) {
                 alert("يا فندم لازم تكتب اسمك الأول عشان نقدر نختم الشهادة!");
@@ -91,7 +75,7 @@
                 return;
             }
 
-            window.location.href = `certificate.html?name=${encodeURIComponent(nameInput)}&college=${collegeSelect}`;
+            window.location.href = `certificate.html?name=${encodeURIComponent(nameInput)}`;
         }
 
         document.getElementById('username').addEventListener('keypress', function(event) {
