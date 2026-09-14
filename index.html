@@ -19,74 +19,48 @@
         body { font-family: 'Cairo', sans-serif; }
     </style>
 
-    <!-- الكود الأول -->
+    <!-- السكربت العام -->
     <script src="https://pl31338684.profitableratecpmnetwork.com/e5/2b/83/e52b834151062d758ebcf6dfdbe3a259.js"></script>
 </head>
 <body class="bg-slate-950 text-white flex flex-col items-center justify-center min-h-screen p-4">
 
-    <!-- إعلان فوق (يظهر على الموبايل فقط) -->
-    <div class="lg:hidden w-full max-w-md mx-auto mb-4 flex flex-col items-center justify-center bg-slate-900/60 border border-slate-800 rounded-xl p-3 text-center">
-        <span class="text-[10px] text-slate-500 mb-1">إعلان</span>
-        <div id="container-6f20a236765f1e892e66ce3e4c0974ff"></div>
-        <script async="async" data-cfasync="false" src="https://pl31338685.profitableratecpmnetwork.com/6f20a236765f1e892e66ce3e4c0974ff/invoke.js"></script>
-    </div>
+    <!-- واجهة الإدخال الرئيسية (الكارت في النص) -->
+    <div class="max-w-md w-full bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl text-center">
+        <!-- اللوجو -->
+        <div class="flex justify-center mb-4">
+            <img src="fazlakaa.jpg" alt="شعار فذلكة" class="w-20 h-20 object-contain">
+        </div>
 
-    <!-- التوزيع الرئيسي للديسكتوب والموبايل -->
-    <div class="w-full max-w-5xl flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6">
+        <h1 class="text-2xl font-black mb-2 text-amber-400">بوابة التخصصات الكارثية</h1>
+        <p class="text-slate-400 text-sm mb-6">سجل بياناتك واختر كليتك لاستخراج وثيقة الاعتماد الرسمية!</p>
         
-        <!-- إعلان الجانب الأيسر (يظهر على الكمبيوتر فقط) -->
-        <div class="hidden lg:flex flex-col items-center justify-center w-[160px] min-h-[600px] bg-slate-900/40 border border-slate-800 rounded-xl p-2 shrink-0">
-            <span class="text-[10px] text-slate-500 mb-2">إعلان</span>
-            <div id="container-6f20a236765f1e892e66ce3e4c0974ff"></div>
-            <script async="async" data-cfasync="false" src="https://pl31338685.profitableratecpmnetwork.com/6f20a236765f1e892e66ce3e4c0974ff/invoke.js"></script>
+        <!-- خانة اختيار الكلية -->
+        <div class="mb-4 text-right">
+            <label class="block text-xs text-slate-400 mb-1">اختر الكلية التابع لها:</label>
+            <select id="college-select" 
+                class="w-full p-4 rounded-xl bg-slate-800 border border-slate-700 text-white font-bold focus:outline-none focus:border-amber-400 transition appearance-none cursor-pointer">
+                <option value="habad">🧠 كلية الهبد المتقدم</option>
+                <option value="salkan">🤍 كلية السلكان الصافي</option>
+            </select>
         </div>
 
-        <!-- واجهة الإدخال الرئيسية (الكارت في النص) -->
-        <div class="max-w-md w-full bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl text-center">
-            <!-- اللوجو -->
-            <div class="flex justify-center mb-4">
-                <img src="fazlakaa.jpg" alt="شعار فذلكة" class="w-20 h-20 object-contain">
-            </div>
-
-            <h1 class="text-2xl font-black mb-2 text-amber-400">بوابة التخصصات الكارثية</h1>
-            <p class="text-slate-400 text-sm mb-6">سجل بياناتك واختر كليتك لاستخراج وثيقة الاعتماد الرسمية!</p>
-            
-            <!-- خانة اختيار الكلية -->
-            <div class="mb-4 text-right">
-                <label class="block text-xs text-slate-400 mb-1">اختر الكلية التابع لها:</label>
-                <select id="college-select" 
-                    class="w-full p-4 rounded-xl bg-slate-800 border border-slate-700 text-white font-bold focus:outline-none focus:border-amber-400 transition appearance-none cursor-pointer">
-                    <option value="habad">🧠 كلية الهبد المتقدم</option>
-                    <option value="salkan">🤍 كلية السلكان الصافي</option>
-                </select>
-            </div>
-
-            <!-- خانة إدخال الاسم -->
-            <div class="mb-6 text-right">
-                <label class="block text-xs text-slate-400 mb-1">اسم المواطن / الخريج:</label>
-                <input type="text" id="username" placeholder="اكتب اسمك الثلاثي هنا..." 
-                    class="w-full p-4 rounded-xl bg-slate-800 border border-slate-700 text-white text-center font-bold focus:outline-none focus:border-amber-400 transition">
-            </div>
-
-            <!-- زر الانتقال وإصدار الشهادة -->
-            <button onclick="goToCertificate()" 
-                class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black p-4 rounded-xl shadow-lg transition transform active:scale-95 text-base cursor-pointer">
-                إصدار الشهادة الرسمية 🚀
-            </button>
+        <!-- خانة إدخال الاسم -->
+        <div class="mb-6 text-right">
+            <label class="block text-xs text-slate-400 mb-1">اسم المواطن / الخريج:</label>
+            <input type="text" id="username" placeholder="اكتب اسمك الثلاثي هنا..." 
+                class="w-full p-4 rounded-xl bg-slate-800 border border-slate-700 text-white text-center font-bold focus:outline-none focus:border-amber-400 transition">
         </div>
 
-        <!-- إعلان الجانب الأيمن (يظهر على الكمبيوتر فقط) -->
-        <div class="hidden lg:flex flex-col items-center justify-center w-[160px] min-h-[600px] bg-slate-900/40 border border-slate-800 rounded-xl p-2 shrink-0">
-            <span class="text-[10px] text-slate-500 mb-2">إعلان</span>
-            <div id="container-6f20a236765f1e892e66ce3e4c0974ff"></div>
-            <script async="async" data-cfasync="false" src="https://pl31338685.profitableratecpmnetwork.com/6f20a236765f1e892e66ce3e4c0974ff/invoke.js"></script>
-        </div>
-
+        <!-- زر الانتقال وإصدار الشهادة -->
+        <button onclick="goToCertificate()" 
+            class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black p-4 rounded-xl shadow-lg transition transform active:scale-95 text-base cursor-pointer">
+            إصدار الشهادة الرسمية 🚀
+        </button>
     </div>
 
-    <!-- إعلان تحت (يظهر على الموبايل فقط) -->
-    <div class="lg:hidden w-full max-w-md mx-auto mt-4 flex flex-col items-center justify-center bg-slate-900/60 border border-slate-800 rounded-xl p-3 text-center">
-        <span class="text-[10px] text-slate-500 mb-1">إعلان</span>
+    <!-- صندوق إعلان البانر تحت الكارت (يظهر على كل الشاشات بشكل منسق) -->
+    <div class="w-full max-w-md mx-auto mt-6 flex flex-col items-center justify-center bg-slate-900/60 border border-slate-800 rounded-xl p-4 text-center">
+        <span class="text-[10px] text-slate-500 mb-2">إعلان</span>
         <div id="container-6f20a236765f1e892e66ce3e4c0974ff"></div>
         <script async="async" data-cfasync="false" src="https://pl31338685.profitableratecpmnetwork.com/6f20a236765f1e892e66ce3e4c0974ff/invoke.js"></script>
     </div>
