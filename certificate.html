@@ -275,7 +275,7 @@
 
             // تحديث نص الرسالة الافتراضي باسم الشخص
             const customTextarea = document.getElementById('custom-share-text');
-            customTextarea.value = `لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان باسم (${decodedName})! صمم شهادتك فوراً من هنا: ${mainSiteUrl}`;
+            customTextarea.value = `(${decodedName}): ${mainSiteUrl}`;
 
             const hash = getNameHash(decodedName);
             const idx = hash % 6;
