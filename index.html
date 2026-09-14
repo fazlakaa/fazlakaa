@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوابة التخصصات الكارثية - جمهورية الهبد والسلكان 🎓</title>
-    
-    <!-- أكواد المعاينة لفيسبوك والسوشيال ميديا (Open Graph) لتظهر ككارت احترافي -->
+    <link rel="icon" type="image/jpeg" href="fazlakaa.jpg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- أكواد المعاينة لفيسبوك والسوشيال ميديا (Open Graph) -->
     <meta property="og:title" content="بوابة التخصصات الكارثية - جمهورية الهبد والسلكان" />
     <meta property="og:description" content="سجل بياناتك واختر كليتك لاستخراج وثيقة الاعتماد الرسمية ومعرفة تقديرك الحقيقي فوراً!" />
     <meta property="og:image" content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop" />
@@ -22,7 +23,11 @@
 
     <!-- واجهة الإدخال الرئيسية -->
     <div class="max-w-md w-full bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl text-center">
-        <div class="text-5xl mb-3">🏛️📜</div>
+        <!-- اللوجو الجديد -->
+        <div class="flex justify-center mb-4">
+            <img src="fazlakaa.jpg" alt="شعار فذلكة" class="w-20 h-20 object-contain">
+        </div>
+
         <h1 class="text-2xl font-black mb-2 text-amber-400">بوابة التخصصات الكارثية</h1>
         <p class="text-slate-400 text-sm mb-6">سجل بياناتك واختر كليتك لاستخراج وثيقة الاعتماد الرسمية!</p>
         
@@ -50,13 +55,17 @@
         </button>
     </div>
 
+    <!-- مكان إعلان Adsterra اختياري في الصفحة الرئيسية -->
+    <div class="mt-6 text-center text-xs text-slate-500">
+        <!-- حط كود إعلان Adsterra هنا لو حبيت -->
+    </div>
+
     <!-- تذييلة بسيطة -->
-    <div class="mt-8 text-xs text-slate-500 text-center">
+    <div class="mt-4 text-xs text-slate-500 text-center">
         جميع الحقوق محفوظة لوزارة الضحك والتسليك © 2026
     </div>
 
     <script>
-        // ضبط رابط المعاينة تلقائياً بناءً على استضافتك الحالية على نيتليفاي
         document.getElementById('meta-og-url').setAttribute('content', window.location.href);
 
         function goToCertificate() {
@@ -69,11 +78,9 @@
                 return;
             }
 
-            // الانتقال لصفحة الشهادة مع تمرير الاسم والكلية في الرابط
             window.location.href = `certificate.html?name=${encodeURIComponent(nameInput)}&college=${collegeSelect}`;
         }
 
-        // السماح بالضغط على مفتاح Enter لإصدار الشهادة مباشرة
         document.getElementById('username').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 goToCertificate();
