@@ -25,7 +25,7 @@
 <body class="bg-slate-950 text-white flex flex-col items-center justify-center min-h-screen p-4">
 
     <!-- واجهة الإدخال الرئيسية (الكارت في النص) -->
-    <div class="max-w-md w-full bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl text-center">
+    <div id="main-card" class="max-w-md w-full bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl text-center">
         <!-- اللوجو -->
         <div class="flex justify-center mb-4">
             <img src="fazlakaa.jpg" alt="شعار فذلكة" class="w-20 h-20 object-contain">
@@ -48,6 +48,16 @@
         </button>
     </div>
 
+    <!-- شاشة التحميل والتشويق (تظهر مؤقتاً عند الضغط) -->
+    <div id="loading-box" class="max-w-md w-full bg-slate-900 border border-amber-500/40 p-8 rounded-3xl shadow-2xl text-center hidden">
+        <div class="text-5xl mb-4 animate-bounce">🧪</div>
+        <h3 id="loading-text" class="text-lg font-black text-amber-400 mb-2">جاري سحب عينة من الهبد في الدم...</h3>
+        <p class="text-xs text-slate-400">يرجى الانتظار حتى تقوم اللجنة العليا بفحص الملف</p>
+        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden mt-6">
+            <div id="loading-bar" class="bg-amber-500 h-full w-0 transition-all duration-300"></div>
+        </div>
+    </div>
+
     <!-- صندوق إعلان البانر تحت الكارت -->
     <div class="w-full max-w-md mx-auto mt-6 flex flex-col items-center justify-center bg-slate-900/60 border border-slate-800 rounded-xl p-4 text-center">
         <span class="text-[10px] text-slate-500 mb-2">إعلان</span>
@@ -63,6 +73,14 @@
     <script>
         document.getElementById('meta-og-url').setAttribute('content', window.location.href);
 
+        const funnyLoadingMessages = [
+            "جاري سحب عينة من الهبد في الدم... 🧪",
+            "جاري استشارة مجلس أبحاث الفتي... 🧐",
+            "جاري مراجعة سجلات السلكان في الكنترول... 📑",
+            "جاري ختم الشهادة بختم النسر المضروب... 🦅",
+            "مبروك مقدماً يا فهلوي، الشهادة بتجهّز... 🎉"
+        ];
+
         function goToCertificate() {
             const usernameEl = document.getElementById('username');
             if (!usernameEl) return;
@@ -75,7 +93,26 @@
                 return;
             }
 
-            window.location.href = `certificate.html?name=${encodeURIComponent(nameInput)}`;
+            document.getElementById('main-card').classList.add('hidden');
+            document.getElementById('loading-box').classList.remove('hidden');
+
+            const textEl = document.getElementById('loading-text');
+            const barEl = document.getElementById('loading-bar');
+            let step = 0;
+            barEl.style.width = '20%';
+
+            const interval = setInterval(() => {
+                step++;
+                if (step < funnyLoadingMessages.length) {
+                    textEl.innerText = funnyLoadingMessages[step];
+                    barEl.style.width = `${(step + 1) * 20}%`;
+                }
+            }, 550);
+
+            setTimeout(() => {
+                clearInterval(interval);
+                window.location.href = `certificate.html?name=${encodeURIComponent(nameInput)}`;
+            }, 2800);
         }
 
         document.getElementById('username').addEventListener('keypress', function(event) {
