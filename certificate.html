@@ -49,10 +49,19 @@
     <!-- وثيقة الشهادة الرسمية -->
     <div id="certificate-card" class="max-w-2xl w-full bg-[#fbf9f1] text-slate-900 p-8 md:p-12 rounded-xl shadow-2xl border-[12px] border-double border-amber-800 relative my-4 text-center cert-font">
         
+        <!-- علامة 100% هادية في الزاوية فوق على الشمال -->
+        <div class="top-4 left-4 bg-amber-500/15 border border-amber-600/40 text-amber-900 text-[11px] font-black px-3 py-1 rounded-full inline-flex items-center gap-1 shadow-sm mb-4">
+            <span>💯</span>
+            <span>مضمون ومعتمد 100%</span>
+        </div>
+
         <div class="flex justify-between items-center border-b-2 border-amber-700/30 pb-4 mb-6">
             <div class="text-xs font-bold text-amber-900">جمهورية الهبد والسلكان العربية<br>وزارة التخصصات الدقيقة</div>
             <div class="text-3xl">🦅</div>
-            <div class="text-xs font-bold text-amber-900">رقم الاعتماد: #2026-OK<br>سنة التخرج: لحد ما ربها يفرجها</div>
+            <div class="text-xs font-bold text-amber-900">
+                <a href="https://fazlakaa.github.io/fazlakaa/" class="text-amber-950 underline">fazlakaa.github.io/fazlakaa/</a><br>
+                سنة التخرج: لحد ما ربها يفرجها
+            </div>
         </div>
 
         <h3 id="college-header-title" class="text-lg text-amber-800 font-bold tracking-widest uppercase mb-1">باسم عميد الكلية</h3>
@@ -91,20 +100,14 @@
                 <div class="font-['Amiri'] text-lg text-red-800" id="dean-signature">---</div>
             </div>
         </div>
-
-        <div class="mt-8 pt-2 border-t border-amber-700/20 text-[11px] font-bold text-amber-900 tracking-wider">
-            🌐 صمم شهادتك الآن عبر موقعنا: <span id="website-footer-link" class="text-red-700 underline"></span>
-        </div>
     </div>
 
     <!-- أزرار التحكم والمشاركة -->
     <div class="max-w-2xl w-full flex flex-col gap-3 mt-4 mb-8">
-        <!-- زر فتح نافذة المشاركة (فيسبوك، واتساب، تليجرام) -->
         <button onclick="toggleModal(true)" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black p-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer text-lg">
             <span>🚀</span> شارك الشهادة على فيسبوك والسوشيال ميديا
         </button>
 
-        <!-- زر الحفظ كصورة أو PDF للاستوري -->
         <button onclick="window.print()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold p-3 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer">
             <span>📸</span> حفظ الشهادة كصورة/PDF (للاستوري)
         </button>
@@ -121,7 +124,6 @@
             <p class="text-xs text-slate-400 mb-6">انشر شهادتك وخلي الكل يشوفها:</p>
             
             <div class="grid grid-cols-2 gap-3 mb-4">
-                <!-- زر فيسبوك الرسمي اللي بيفتح نافذة إنشاء منشور بالمعاينة -->
                 <a id="facebook-btn" href="#" target="_blank" class="bg-blue-700 hover:bg-blue-600 p-3 rounded-xl font-bold flex items-center justify-center gap-2 transition text-white no-underline">
                     <span>📘</span> فيسبوك
                 </a>
@@ -182,8 +184,6 @@
         const mainSiteUrl = window.location.origin + window.location.pathname.replace('certificate.html', 'index.html');
 
         window.onload = function() {
-            document.getElementById('website-footer-link').innerText = mainSiteUrl.replace('https://', '');
-
             const urlParams = new URLSearchParams(window.location.search);
             const name = urlParams.get('name');
             const college = urlParams.get('college');
@@ -224,7 +224,6 @@
                 resultBox.className = "mb-6 border-4 border-emerald-500 bg-emerald-100/50 p-6 rounded-2xl shadow-inner";
             }
 
-            // ربط الروابط الرسمية للمنصات داخل عناصر الـ HTML لضمان الأمان التام وعدم حدوث أي خطأ
             const shareText = `لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان باسم (${decodedName})! اطلع اعمل شهادتك فوراً من هنا: ${mainSiteUrl}`;
             
             document.getElementById('facebook-btn').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(mainSiteUrl)}`;
