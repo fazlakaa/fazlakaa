@@ -364,7 +364,7 @@
 
         function copyLinkOnly() {
             const name = document.getElementById('display-name').innerText;
-            const shareText = `لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان باسم (${name})! اطلع اعمل شهادتك فوراً من هنا: ${mainSiteUrl}`;
+            const shareText = `(${name})! اطلع اعمل شهادتك من هنا: ${mainSiteUrl}`;
 
             navigator.clipboard.writeText(shareText).then(() => {
                 alert("تم نسخ النص واللينك بنجاح!");
