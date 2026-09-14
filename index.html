@@ -71,12 +71,20 @@
         document.getElementById('meta-og-url').setAttribute('content', window.location.href);
 
         function goToCertificate() {
-            const nameInput = document.getElementById('username').value.trim();
-            const collegeSelect = document.getElementById('college-select').value;
+            const usernameEl = document.getElementById('username');
+            const collegeEl = document.getElementById('college-select');
+
+            if (!usernameEl || !collegeEl) {
+                alert("تأكد أن خانة الاسم والكلية عندهم الـ id المضبوط!");
+                return;
+            }
+
+            const nameInput = usernameEl.value.trim();
+            const collegeSelect = collegeEl.value;
             
             if(!nameInput) {
                 alert("يا فندم لازم تكتب اسمك الأول عشان نقدر نختم الشهادة!");
-                document.getElementById('username').focus();
+                usernameEl.focus();
                 return;
             }
 
