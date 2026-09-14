@@ -75,7 +75,7 @@
             <div class="text-xs font-bold text-amber-900">جمهورية الهبد والسلكان العربية<br>وزارة التخصصات الدقيقة</div>
             <div class="text-3xl">🦅</div>
             <div class="text-xs font-bold text-amber-900">
-                <a href="https://fazlakaa.pro/" class="text-amber-950 underline">fazlakaa.pro</a><br>
+                <span class="text-amber-950 font-black">fazlakaa.pro</span><br>
                 سنة التخرج: لحد ما ربها يفرجها
             </div>
         </div>
@@ -121,16 +121,28 @@
                 <div class="font-['Amiri'] text-lg text-red-800" id="dean-signature">---</div>
             </div>
         </div>
+
+        <!-- فاصل دقيق يحمل اسم الموقع في أسفل الشهادة -->
+        <div class="mt-6 pt-3 border-t border-amber-700/20 text-[10px] text-amber-900/80 font-bold flex justify-between items-center">
+            <span>وثيقة رسمية صادرة عن بوابة فذلكة</span>
+            <span>fazlakaa.pro</span>
+        </div>
+    </div>
+
+    <!-- خانة كتابة الرسالة المرافقة للمشاركة -->
+    <div class="max-w-2xl w-full bg-slate-900 border border-slate-800 p-4 rounded-xl mb-4">
+        <label for="custom-share-text" class="block text-xs text-amber-400 font-bold mb-2">✏️ نص الرسالة المرافق مع الصورة (قابل للتعديل):</label>
+        <textarea id="custom-share-text" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-amber-400 resize-none font-bold">لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان! صمم شهادتك فوراً من هنا: https://fazlakaa.pro/</textarea>
     </div>
 
     <!-- أزرار التحكم والمشاركة -->
-    <div class="max-w-2xl w-full flex flex-col gap-3 mt-4 mb-4">
+    <div class="max-w-2xl w-full flex flex-col gap-3 mb-4">
         <button onclick="toggleModal(true)" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black p-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer text-lg">
             <span>🚀</span> شارك الرابط على فيسبوك والسوشيال ميديا
         </button>
 
         <button onclick="shareImageDirectly()" id="share-img-btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black p-3.5 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer text-base">
-            <span>📤</span> مشاركة الصورة مباشرة (واتساب / فيسبوك)
+            <span>📤</span> مشاركة الصورة مع الرسالة مباشرة (واتساب / فيسبوك)
         </button>
 
         <button onclick="downloadCertificateAsImage()" id="save-btn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black p-3.5 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer text-base">
@@ -261,6 +273,10 @@
             const decodedName = decodeURIComponent(name);
             document.getElementById('display-name').innerText = decodedName;
 
+            // تحديث نص الرسالة الافتراضي باسم الشخص
+            const customTextarea = document.getElementById('custom-share-text');
+            customTextarea.value = `لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان باسم (${decodedName})! صمم شهادتك فوراً من هنا: ${mainSiteUrl}`;
+
             const hash = getNameHash(decodedName);
             const idx = hash % 6;
             const chosenLevel = allLevels[idx];
@@ -282,11 +298,7 @@
             document.getElementById('dean-signature').innerText = chosenLevel.dean;
             document.getElementById('result-box').className = chosenLevel.boxClass;
 
-            const shareText = `لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان باسم (${decodedName})! اطلع اعمل شهادتك فوراً من هنا: ${mainSiteUrl}`;
-            
-            document.getElementById('facebook-btn').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(mainSiteUrl)}`;
-            document.getElementById('whatsapp-btn').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
-            document.getElementById('telegram-btn').href = `https://t.me/share/url?url=${encodeURIComponent(mainSiteUrl)}&text=${encodeURIComponent(shareText)}`;
+            updateShareLinks();
 
             if (typeof confetti === 'function') {
                 confetti({
@@ -296,6 +308,15 @@
                 });
             }
         };
+
+        function updateShareLinks() {
+            const shareText = document.getElementById('custom-share-text').value;
+            document.getElementById('facebook-btn').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(mainSiteUrl)}`;
+            document.getElementById('whatsapp-btn').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+            document.getElementById('telegram-btn').href = `https://t.me/share/url?url=${encodeURIComponent(mainSiteUrl)}&text=${encodeURIComponent(shareText)}`;
+        }
+
+        document.getElementById('custom-share-text').addEventListener('input', updateShareLinks);
 
         function downloadCertificateAsImage() {
             const card = document.getElementById('certificate-card');
@@ -322,7 +343,7 @@
         function shareImageDirectly() {
             const card = document.getElementById('certificate-card');
             const btn = document.getElementById('share-img-btn');
-            const decodedName = document.getElementById('display-name').innerText;
+            const shareText = document.getElementById('custom-share-text').value;
             const originalText = btn.innerHTML;
             btn.innerHTML = '<span>⏳</span> جاري تجهيز المشاركة...';
 
@@ -331,7 +352,6 @@
                 cacheBust: true
             }).then(blob => {
                 const file = new File([blob], 'fazlaka-certificate.png', { type: 'image/png' });
-                const shareText = `لحق شوف شهادة تخرجي الرسمية في جمهورية الهبد والسلكان باسم (${decodedName})! صمم شهادتك من هنا: ${mainSiteUrl}`;
 
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     navigator.share({
@@ -349,7 +369,7 @@
                     link.download = 'fazlaka-certificate.png';
                     link.href = url;
                     link.click();
-                    alert('تم حفظ الصورة على جهازك لتقوم بمشاركتها.');
+                    alert('تم حفظ الصورة على جهازك لتقوم بمشاركتها مع النص.');
                     btn.innerHTML = originalText;
                 }
             }).catch(() => {
@@ -363,8 +383,7 @@
         }
 
         function copyLinkOnly() {
-            const name = document.getElementById('display-name').innerText;
-            const shareText = `(${name})! اطلع اعمل شهادتك من هنا: ${mainSiteUrl}`;
+            const shareText = document.getElementById('custom-share-text').value;
 
             navigator.clipboard.writeText(shareText).then(() => {
                 alert("تم نسخ النص واللينك بنجاح!");
