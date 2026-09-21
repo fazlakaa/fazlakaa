@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطبعة الفذلكة - اطبع صورتك على العملة</title>
+    <!-- استدعاء Tailwind CSS للتصميم -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- استدعاء مكتبة html2canvas لتحويل التصميم لصورة صالحة للتحميل -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        /* فلتر مطبعة الفلوس: بيحول أي صورة ملونة لشبه حفر الحبر الأبيض والأسود */
+        .money-engraved-filter {
+            filter: grayscale(100%) contrast(160%) brightness(85%) sepia(20%);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="text-center mb-6">
+        <h1 class="text-3xl font-extrabold text-yellow-400 mb-2">💵 مطبعة الفذلكة المركزية 💵</h1>
+        <p class="text-slate-400 text-sm">ارفع صورتك.. وحوّلها لعملة رسمية مطبوعة بحبر حقيقي!</p>
+    </div>
+
+    <!-- صندوق العملة الشامل (ده اللي هيتحول لصورة عند التحميل) -->
+    <div id="money-container" class="relative w-[650px] h-[300px] bg-slate-900 rounded-xl shadow-2xl overflow-hidden border-4 border-yellow-600">
+        
+        <!-- 1. طبقة صورة المستخدم (متحطفة في الخلفية وتحت الفلتر) -->
+        <div class="absolute top-[50px] left-[235px] w-[150px] h-[180px] bg-slate-800 overflow-hidden z-10 rounded-full border-2 border-yellow-500/50">
+            <img id="user-img" src="https://via.placeholder.com/150" class="w-full h-full object-cover money-engraved-filter" alt="صورتك">
+        </div>
+
+        <!-- 2. طبقة قالب الفلوس (اللي فوق الوش وعليها الزخارف) -->
+        <!-- *ملاحظة: استبدل الرابط ده برابط قالب الفلوس الشفاف الخاص بك حين ترفعه* -->
+        <div class="absolute inset-0 z-20 pointer-events-none flex items-center justify-between p-6 bg-gradient-to-r from-emerald-900/40 via-transparent to-emerald-900/40 border-8 border-yellow-500/30">
+            <!-- زخارف جانبية للعملة وهمية للتوضيح -->
+            <div class="text-yellow-500/80 font-bold text-2xl tracking-widest">200</div>
+            <div class="text-center text-yellow-200">
+                <span class="block text-xs tracking-widest">البنك المركزي للفذلكة</span>
+                <span class="text-lg font-black">جُنيهان فذلكيان</span>
+            </div>
+            <div class="text-yellow-500/80 font-bold text-2xl tracking-widest">200</div>
+        </div>
+    </div>
+
+    <!-- لوحة التحكم بالأسفل -->
+    <div class="mt-8 bg-slate-900 p-6 rounded-xl shadow-lg w-full max-w-md border border-slate-800 text-center">
+        <label class="block mb-3 text-sm font-semibold text-yellow-300">اختر صورتك الشخصية:</label>
+        <input type="file" id="image-upload" accept="image/*" class="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-yellow-500 file:text-slate-950 hover:file:bg-yellow-400 mb-6 cursor-pointer">
+
+        <button id="download-btn" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-lg shadow transition hidden flex items-center justify-center gap-2">
+            <span>تحميل العملة الرسمية ومشاركتها</span> 📥
+        </button>
+    </div>
+
+    <script>
+        const imageUpload = document.getElementById('image-upload');
+        const userImg = document.getElementById('user-img');
+        const downloadBtn = document.getElementById('download-btn');
+        const moneyContainer = document.getElementById('money-container');
+
+        // قراءة الصورة المرفوعة وعرضها فوراً
+        imageUpload.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    userImg.src = e.target.result;
+                    downloadBtn.classList.remove('hidden'); // إظهار زر التحميل
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // تفعيل زر التحميل عبر مكتبة html2canvas
+        downloadBtn.addEventListener('click', function() {
+            downloadBtn.innerText = "جاري إصدار العملة وجعلها صالحة للسرقة.. ⏳";
+            html2canvas(moneyContainer, { scale: 2, useCORS: true }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'fazlakaa-official-currency.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                downloadBtn.innerText = "تحميل العملة الرسمية ومشاركتها 📥";
+            });
+        });
+    </script>
+</body>
+</html>
