@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مطبعة الفذلكة - مطبعة العملة بـ الذكاء الاصطناعي 💵</title>
+    <title>مطبعة الفذلكة المركزية - مطبعة العملة بـ الذكاء الاصطناعي 💵</title>
     <link rel="icon" type="image/jpeg" href="fazlakaa.jpg">
-    <!-- استدعاء Tailwind CSS للتصميم -->
+    <!-- استدعاء Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- استدعاء مكتبة html2canvas لتحويل التصميم لصورة صالحة للتحميل -->
+    <!-- مكتبة html2canvas لتحويل العملة لصورة -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
         body { font-family: 'Cairo', sans-serif; }
@@ -16,8 +16,6 @@
             filter: grayscale(100%) contrast(170%) brightness(85%) sepia(25%);
         }
     </style>
-    <!-- السكربت العام للإعلانات -->
-    <script src="https://pl31338684.profitableratecpmnetwork.com/e5/2b/83/e52b834151062d758ebcf6dfdbe3a259.js"></script>
 </head>
 <body class="bg-slate-950 text-white min-h-screen flex flex-col items-center justify-between p-4">
 
@@ -28,19 +26,19 @@
 
     <div class="text-center mb-4">
         <h1 class="text-2xl md:text-3xl font-black text-yellow-400 mb-1">💵 مطبعة الفذلكة والذكاء الاصطناعي 💵</h1>
-        <p class="text-slate-400 text-xs md:text-sm">ارفع صورتك.. ودع البنك المركزي والـ AI يصدران عملتك الرسمية!</p>
+        <p class="text-slate-400 text-xs md:text-sm">ارفع صورتك.. ودع البنك المركزي والـ AI يصدران عملتك مع تقرير ساخر!</p>
     </div>
 
     <!-- صندوق العملة الشامل (القابل للتحميل) -->
     <div class="w-full max-w-xl flex justify-center overflow-hidden my-2">
         <div id="money-container" class="relative w-full max-w-[550px] aspect-[16/9] bg-slate-900 rounded-2xl shadow-2xl overflow-hidden border-4 border-yellow-600 flex-shrink-0">
             
-            <!-- 1. طبقة صورة المستخدم -->
+            <!-- طبقة صورة المستخدم -->
             <div class="absolute top-[22%] left-[38%] w-[24%] h-[56%] bg-slate-800 overflow-hidden z-10 rounded-full border-2 border-yellow-500/50">
                 <img id="user-img" src="https://via.placeholder.com/150" class="w-full h-full object-cover money-engraved-filter" alt="صورتك">
             </div>
 
-            <!-- 2. طبقة قالب الفلوس والزخارف -->
+            <!-- طبقة قالب الفلوس والزخارف -->
             <div class="absolute inset-0 z-20 pointer-events-none flex items-center justify-between p-4 md:p-6 bg-gradient-to-r from-emerald-950/60 via-transparent to-emerald-950/60 border-4 border-yellow-500/30">
                 <div class="text-yellow-500/90 font-black text-xl md:text-2xl tracking-widest">200</div>
                 <div class="text-center text-yellow-100">
@@ -52,10 +50,10 @@
         </div>
     </div>
 
-    <!-- صندوق التقرير المالي المستخرج من Gemini API -->
+    <!-- صندوق البيان المالي للذكاء الاصطناعي -->
     <div class="w-full max-w-xl mt-4 bg-slate-900 p-4 rounded-xl border border-slate-800 hidden" id="aiReportBox">
-        <h3 class="text-xs font-bold text-yellow-400 mb-1">بيان عاجل من محافظ البنك المركزي (بواسطة AI):</h3>
-        <p id="aiReportText" class="text-xs text-slate-300 leading-relaxed"></p>
+        <h3 class="text-xs font-bold text-yellow-400 mb-1">بيان عاجل من محافظ البنك المركزي (بواسطة Gemini AI):</h3>
+        <p id="aiReportText" class="text-xs text-slate-300 leading-relaxed">جاري إصدار التقرير...</p>
     </div>
 
     <!-- لوحة التحكم بالأسفل -->
@@ -63,8 +61,8 @@
         <label class="block mb-2 text-xs font-semibold text-yellow-300">اختر صورتك الشخصية:</label>
         <input type="file" id="image-upload" accept="image/*" class="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-yellow-500 file:text-slate-950 hover:file:bg-yellow-400 mb-4 cursor-pointer">
 
-        <button id="print-btn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-4 rounded-xl shadow transition hidden flex items-center justify-center gap-2 text-xs cursor-pointer mb-2">
-            <span>إصدار البيان المالي وتحليل الشخصية بالـ AI 🤖</span>
+        <button id="ai-btn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-4 rounded-xl shadow transition hidden flex items-center justify-center gap-2 text-xs cursor-pointer mb-2">
+            <span>تحليل الشخصية وإصدار البيان المالي بالـ AI 🤖</span>
         </button>
 
         <button id="download-btn" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl shadow transition hidden flex items-center justify-center gap-2 text-xs cursor-pointer">
@@ -72,19 +70,17 @@
         </button>
     </div>
 
-    <!-- تذييلة -->
     <div class="text-xs text-slate-500 text-center pb-2 mt-4">
         جميع الحقوق محفوظة لوزارة الضحك والتسليك © 2026
     </div>
 
-    <!-- السكربت المباشر بدون أخطاء المصادقة -->
+    <!-- السكربت البرمجي المرتبط بـ Gemini API -->
     <script>
-        // مفتاح الـ API الخاص بك
         const apiKey = "AQ.Ab8RN6LcwrZ6-MSDBogJiBLBu-nLahpxfyg2DvG6WLJHEVo7Gw";
 
         const imageUpload = document.getElementById('image-upload');
         const userImg = document.getElementById('user-img');
-        const printBtn = document.getElementById('print-btn');
+        const aiBtn = document.getElementById('ai-btn');
         const downloadBtn = document.getElementById('download-btn');
         const moneyContainer = document.getElementById('money-container');
         const aiReportBox = document.getElementById('aiReportBox');
@@ -93,7 +89,6 @@
         let rawBase64Image = null;
         let imageMimeType = "image/jpeg";
 
-        // قراءة الصورة المرفوعة
         imageUpload.addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
@@ -101,25 +96,25 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     userImg.src = e.target.result;
-                    rawBase64Image = e.target.result.split(',')[1]; // حفظ الكود الصافي
-                    printBtn.classList.remove('hidden'); 
-                    downloadBtn.classList.remove('hidden'); 
+                    rawBase64Image = e.target.result.split(',')[1];
+                    aiBtn.classList.remove('hidden');
+                    downloadBtn.classList.remove('hidden');
                 }
                 reader.readAsDataURL(file);
             }
         });
 
-        // زر استدعاء Gemini API بالطريقة المباشرة (REST API) لتجاوز خطأ 401
-        printBtn.addEventListener('click', async function() {
+        // زر استدعاء الذكاء الاصطناعي بالطريقة المباشرة
+        aiBtn.addEventListener('click', async function() {
             if (!rawBase64Image) return;
 
-            printBtn.disabled = true;
-            printBtn.innerText = "جاري انعقاد طوارئ البنك المركزي... ⏳";
+            aiBtn.disabled = true;
+            aiBtn.innerText = "جاري انعقاد طوارئ البنك المركزي وتحليل الوش... ⏳";
             aiReportBox.classList.remove('hidden');
-            aiReportText.innerText = "جاري فحص ملامح حامل العملة وتحديد سعره أمام البصل...";
+            aiReportText.innerText = "جاري فحص الملامح وربطها بسعر البصل والطماطم...";
 
             try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent`;
                 
                 const payload = {
                     contents: [
@@ -132,7 +127,7 @@
                                     }
                                 },
                                 {
-                                    text: "تصرّف كمحافظ البنك المركزي لجمهورية الفهلوة. انظر إلى وجه هذا الشخص في العملة واكتب بياناً مالياً ساخراً من سطرين يوضح سعر صرف هذه العملة الجديدة مقارنة بالبصل والطماطم وسبب تداولها في السوق السوداء."
+                                    text: "تصرّف كمحافظ البنك المركزي لجمهورية الفهلوة. انظر إلى وجه هذا الشخص واكتب بياناً مالياً ساخراً من سطرين يوضح سعر صرف هذه العملة الجديدة في السوق السوداء وسبب طاعته العمياء للبطانية."
                                 }
                             ]
                         }
@@ -142,7 +137,8 @@
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'X-goog-api-key': apiKey
                     },
                     body: JSON.stringify(payload)
                 });
@@ -157,14 +153,14 @@
                 aiReportText.innerText = aiText;
 
             } catch (error) {
-                aiReportText.innerText = "حدث خطأ في ماكينة طباعة النقود: " + error.message;
+                aiReportText.innerText = "حدث خطأ في طابعة البنك: " + error.message;
             } finally {
-                printBtn.disabled = false;
-                printBtn.innerText = "إصدار البيان المالي وتحليل الشخصية بالـ AI 🤖";
+                aiBtn.disabled = false;
+                aiBtn.innerText = "تحليل الشخصية وإصدار البيان المالي بالـ AI 🤖";
             }
         });
 
-        // تفعيل زر التحميل
+        // زر التحميل
         downloadBtn.addEventListener('click', function() {
             downloadBtn.innerText = "جاري إصدار العملة... ⏳";
             html2canvas(moneyContainer, { scale: 2, useCORS: true }).then(canvas => {
