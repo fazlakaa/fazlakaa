@@ -10,14 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <!-- استدعاء مكتبة html2canvas لتحويل التصميم لصورة صالحة للتحميل -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <!-- استدعاء Gemini SDK عبر الـ ESM -->
-    <script type="importmap">
-      {
-        "imports": {
-          "@google/genai": "https://esm.run/@google/genai"
-        }
-      }
-    </script>
     <style>
         body { font-family: 'Cairo', sans-serif; }
         .money-engraved-filter {
@@ -85,13 +77,10 @@
         جميع الحقوق محفوظة لوزارة الضحك والتسليك © 2026
     </div>
 
-    <!-- السكربت البرمجي -->
-    <script type="module">
-        import { GoogleGenAI } from "@google/genai";
-
+    <!-- السكربت المباشر بدون أخطاء المصادقة -->
+    <script>
         // مفتاح الـ API الخاص بك
         const apiKey = "AQ.Ab8RN6LcwrZ6-MSDBogJiBLBu-nLahpxfyg2DvG6WLJHEVo7Gw";
-        const ai = new GoogleGenAI({ apiKey: apiKey });
 
         const imageUpload = document.getElementById('image-upload');
         const userImg = document.getElementById('user-img');
@@ -102,48 +91,71 @@
         const aiReportText = document.getElementById('aiReportText');
 
         let rawBase64Image = null;
+        let imageMimeType = "image/jpeg";
 
         // قراءة الصورة المرفوعة
         imageUpload.addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
+                imageMimeType = file.type;
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     userImg.src = e.target.result;
-                    rawBase64Image = e.target.result.split(',')[1]; // حفظ الكود الصافي للـ API
-                    printBtn.classList.remove('hidden'); // إظهار زر طباعة البيان
-                    downloadBtn.classList.remove('hidden'); // إظهار زر التحميل
+                    rawBase64Image = e.target.result.split(',')[1]; // حفظ الكود الصافي
+                    printBtn.classList.remove('hidden'); 
+                    downloadBtn.classList.remove('hidden'); 
                 }
                 reader.readAsDataURL(file);
             }
         });
 
-        // زر استدعاء Gemini API لتحليل الشخصية وإصدار بيان البنك
+        // زر استدعاء Gemini API بالطريقة المباشرة (REST API) لتجاوز خطأ 401
         printBtn.addEventListener('click', async function() {
             if (!rawBase64Image) return;
 
             printBtn.disabled = true;
             printBtn.innerText = "جاري انعقاد طوارئ البنك المركزي... ⏳";
             aiReportBox.classList.remove('hidden');
-            aiReportText.innerText = "جاري فحص ملامح حامل العملة وتحديد سعره أمام الدولار...";
+            aiReportText.innerText = "جاري فحص ملامح حامل العملة وتحديد سعره أمام البصل...";
 
             try {
-                const response = await ai.models.generateContent({
-                    model: 'gemini-2.5-flash',
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+                
+                const payload = {
                     contents: [
                         {
-                            inlineData: {
-                                data: rawBase64Image,
-                                mimeType: "image/jpeg"
-                            }
-                        },
-                        {
-                            text: "تصرّف كمحافظ البنك المركزي لجمهورية الفهلوة. انظر إلى وجه هذا الشخص في العملة واكتب بياناً مالياً ساخراً من سطرين يوضح سعر صرف هذه العملة الجديدة مقارنة بالبصل والطماطم وسبب تداولها في السوق السوداء."
+                            parts: [
+                                {
+                                    inlineData: {
+                                        mimeType: imageMimeType,
+                                        data: rawBase64Image
+                                    }
+                                },
+                                {
+                                    text: "تصرّف كمحافظ البنك المركزي لجمهورية الفهلوة. انظر إلى وجه هذا الشخص في العملة واكتب بياناً مالياً ساخراً من سطرين يوضح سعر صرف هذه العملة الجديدة مقارنة بالبصل والطماطم وسبب تداولها في السوق السوداء."
+                                }
+                            ]
                         }
                     ]
+                };
+
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
                 });
 
-                aiReportText.innerText = response.text;
+                const data = await response.json();
+
+                if (data.error) {
+                    throw new Error(data.error.message);
+                }
+
+                const aiText = data.candidates[0].content.parts[0].text;
+                aiReportText.innerText = aiText;
+
             } catch (error) {
                 aiReportText.innerText = "حدث خطأ في ماكينة طباعة النقود: " + error.message;
             } finally {
